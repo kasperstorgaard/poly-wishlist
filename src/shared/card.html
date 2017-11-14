@@ -6,29 +6,21 @@
   <template>
     <style include="shared-styles">
       :host {
-        display: block;
-      }
-
-      .media {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: white;
         overflow: hidden;
       }
 
-      .media img {
-        width: 100%;
-        height: auto;
-      }
-
-      .media iframe {
+      .container {
+        display: flex;
         width: 100%;
         height: 100%;
+        background-repeat: no-repeat;
+        background-position: right 0px center;
+        background-size: contain;
       }
     </style>
-    <div class="media">
-      <img src$=[[media]] />
+
+    <div class="container" style$="background-image: url('[[media]]'); background-color: [[bgColor]]">
     </div>
   </template>
 
@@ -38,7 +30,11 @@
 
       static get properties() {
         return {
-          media: String
+          media: String,
+          bgColor: {
+            type: String,
+            value: '#eee'
+          }
         }
       }
     }
