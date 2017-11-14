@@ -1,11 +1,11 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/paper-styles/classes/shadow.html">
-<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
-<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-styles/classes/shadow.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/app-layout/app-grid/app-grid-style.html">
 
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="../shared/styles.html">
 
-<dom-module id="my-view1">
+<dom-module id="pw-wishlist">
   <template>
     <style include="app-grid-style">
       :host {
@@ -83,8 +83,8 @@
   </template>
 
   <script>
-    class MyView1 extends Polymer.Element {
-      static get is() { return 'my-view1'; }
+    class PwWishlist extends Polymer.Element {
+      static get is() { return 'pw-wishlist'; }
 
       static get properties() {
         return {
@@ -102,6 +102,6 @@
       }
     }
 
-    window.customElements.define(MyView1.is, MyView1);
+    window.customElements.define(PwWishlist.is, PwWishlist);
   </script>
 </dom-module>

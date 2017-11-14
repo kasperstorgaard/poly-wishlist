@@ -8,12 +8,10 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
-<link rel="lazy-import" href="my-view1.html">
-<link rel="lazy-import" href="my-view2.html">
-<link rel="lazy-import" href="my-view3.html">
-<link rel="lazy-import" href="my-view404.html">
+<link rel="lazy-import" href="pages/wishlist.html">
+<link rel="lazy-import" href="pages/not-found.html">
 
-<dom-module id="my-app">
+<dom-module id="pw-app">
   <template>
     <style>
       :host {
@@ -57,19 +55,17 @@
       <iron-pages
         selected="[[page]]"
         attr-for-selected="name"
-        fallback-selection="view404"
+        fallback-selection="not-found"
         role="main">
-        <my-view1 name="view1"></my-view1>
-        <my-view2 name="view2"></my-view2>
-        <my-view3 name="view3"></my-view3>
-        <my-view404 name="view404"></my-view404>
+        <pw-wishlist name="wishlist"></wishlist>
+        <pw-not-found name="not-found"></my-view404>
       </iron-pages>
     </app-header-layout>
   </template>
 
   <script>
-    class MyApp extends Polymer.Element {
-      static get is() { return 'my-app'; }
+    class PwApp extends Polymer.Element {
+      static get is() { return 'pw-app'; }
 
       static get properties() {
         return {
@@ -91,24 +87,24 @@
       }
 
       _routePageChanged(page) {
-        this.page = page || 'view1';
+        this.page = page || 'wishlist';
       }
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        var resolvedPageUrl = this.resolveUrl(`pages/${page}.html`);
         Polymer.importHref(
-            resolvedPageUrl,
-            null,
-            this._showPage404.bind(this),
-            true);
+          resolvedPageUrl,
+          null,
+          this._showPage404.bind(this),
+          true);
       }
 
       _showPage404() {
-        this.page = 'view404';
+        this.page = 'not-found';
       }
     }
 
-    window.customElements.define(MyApp.is, MyApp);
+    window.customElements.define(PwApp.is, PwApp);
   </script>
 </dom-module>
