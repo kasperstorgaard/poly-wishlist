@@ -1,0 +1,48 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../shared/styles.html">
+
+<dom-module id="pw-card">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        overflow: hidden;
+      }
+
+      .media img {
+        width: 100%;
+        height: auto;
+      }
+
+      .media iframe {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <div class="media">
+      <img src$=[[media]] />
+    </div>
+  </template>
+
+  <script>
+    class PwCard extends Polymer.Element {
+      static get is() { return 'pw-card'; }
+
+      static get properties() {
+        return {
+          media: String
+        }
+      }
+    }
+
+    window.customElements.define(PwCard.is, PwCard);
+  </script>
+</dom-module>
