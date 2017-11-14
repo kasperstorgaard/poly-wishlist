@@ -1,28 +1,105 @@
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-styles/classes/shadow.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../bower_components/app-layout/app-grid/app-grid-style.html">
+
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-view1">
   <template>
-    <style include="shared-styles">
+    <style include="app-grid-style">
       :host {
         display: block;
+        --app-grid-columns: 4;
+        --app-grid-gutter: 5px;
+        --app-grid-item-height: 250px;
+        --app-grid-expandible-item-columns: 4;
+      }
 
-        padding: 10px;
+      ul {
+        padding: 0;
+        margin-top: 0;
+        list-style: none;
+      }
+
+      .centered-container {
+        margin: 0 auto 40px;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        overflow: hidden;
+      }
+
+      .item:nth-child(5n + 1) {
+        @apply --app-grid-expandible-item;
+        height: 400px;
+      }
+
+      .item img {
+        width: 100%;
+        height: auto;
+      }
+
+      .item iframe {
+        width: 100%;
+        height: 100%;
+      }
+
+      @media(max-width: 799px) {
+        :host {
+          --app-grid-columns: 2;
+          --app-grid-gutter: 5px;
+          --app-grid-item-height: 200px;
+        }
+
+        .centered-container {
+          margin: 10px 5px;
+        }
+
+        .item:nth-child(5n + 1) {
+          height: 250px;
+        }
+
+        [spacer] {
+          margin-left: 0;
+        }
       }
     </style>
 
-    <div class="card">
-      <div class="circle">1</div>
-      <h1>View One</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+    <div class="centered-container">
+      <ul class="app-grid">
+        <li class="item"><iframe src$="[[_frameUrl]]"></iframe></li>
+        <dom-repeat items="[[_photos]]" as="photo">
+          <template>
+            <li class="item"><img src$="[[photo]]" /></li>
+          </template>
+        </dom-repeat>
+      </ul>
     </div>
   </template>
 
   <script>
     class MyView1 extends Polymer.Element {
       static get is() { return 'my-view1'; }
+
+      static get properties() {
+        return {
+          _photos: {
+            type: Array,
+            value: () => [
+              'https://mosaic01.ztat.net/vgs/media/pdp-gallery/C1/42/2E/01/4C/11/C1422E014-C11@12.jpg'
+            ]
+          },
+          _frameUrl: {
+            type: String,
+            value: 'http://tv.giphy.com/celebrate'
+          }
+        }
+      }
     }
 
     window.customElements.define(MyView1.is, MyView1);
