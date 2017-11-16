@@ -13,11 +13,14 @@
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "postinstall": "./node_modules/.bin/bower install",
     "serve": "./node_modules/.bin/prpl-server --root ./build --config ./build/polymer.json",
-    "start": "npm run build && npm run serve"
+    "start": "npm run serve"
   },
   "dependencies": {
     "bower": "^1.8.2",
     "polymer-cli": "^1.5.7",
     "prpl-server": "^1.0.0"
+  },
+  "now": {
+    "alias": "kasper-30"
   }
 }
