@@ -1,5 +1,5 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "kasper-30",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "eslint": "^3.19.0",
@@ -7,9 +7,14 @@
     "eslint-plugin-html": "^2.0.0"
   },
   "scripts": {
+    "build": "./node_modules/.bin/polymer build",
     "lint": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
-    "test": "polymer test",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "serve": "./node_modules/.bin/prpl-server --root ./build --config ./build/polymer.json",
+    "start": "npm run build && npm run serve"
+  },
+  "dependencies": {
+    "polymer-cli": "^1.5.7",
+    "prpl-server": "^1.0.0"
   }
 }
