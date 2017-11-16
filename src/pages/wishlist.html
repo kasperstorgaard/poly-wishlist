@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/paper-styles/classes/shadow.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../../bower_components/app-layout/app-grid/app-grid-style.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
 
 <link rel="import" href="../shared/styles.html">
 <link rel="import" href="../shared/card.html">
@@ -13,7 +14,7 @@
         display: block;
         --app-grid-columns: 3;
         --app-grid-gutter: 5px;
-        --app-grid-item-height: 320px;
+        --app-grid-item-height: 430px;
         --app-grid-expandible-item-columns: 3;
       }
 
@@ -36,39 +37,40 @@
         height: 100%;
       }
 
-      .item:nth-child(5n + 1) {
+      .item:first-child {
         @apply --app-grid-expandible-item;
-        height: 400px;
       }
 
       @media(max-width: 799px) {
         :host {
           --app-grid-columns: 2;
           --app-grid-gutter: 5px;
-          --app-grid-item-height: 200px;
+          --app-grid-item-height: 260px;
         }
 
         .centered-container {
           margin: 10px 5px;
         }
-
-        .item:nth-child(5n + 1) {
-          height: 250px;
-        }
-
-        [spacer] {
-          margin-left: 0;
-        }
       }
     </style>
+
+    <firebase-document
+      app-name="poly-wishlist"
+      path="/items"
+      data="{{_itemsData}}"
+    ></firebase-document>
 
     <div class="centered-container">
       <ul class="app-grid">
         <li class="item"><iframe src$="[[_frameUrl]]"></iframe></li>
-        <dom-repeat items="[[_photos]]" as="photo">
+        <dom-repeat items="[[_items]]" as="item">
           <template>
             <li class="item">
-              <pw-card media=[[photo]]></pw-card>
+              <pw-card
+                name=[[item.name]]
+                media=[[item.media]]
+                description=[[item.description]]
+                brand="[[item.brand]]"></pw-card>
             </li>
           </template>
         </dom-repeat>
@@ -82,17 +84,20 @@
 
       static get properties() {
         return {
-          _photos: {
+          _items: {
             type: Array,
-            value: () => [
-              'https://mosaic01.ztat.net/vgs/media/pdp-gallery/C1/42/2E/01/4C/11/C1422E014-C11@12.jpg'
-            ]
+            computed: '_getItems(_itemsData.*)'
           },
           _frameUrl: {
             type: String,
             value: 'http://tv.giphy.com/celebrate'
-          }
+          },
+          _itemsData: Object
         }
+      }
+
+      _getItems({base}) {
+        return !base ? [] : Object.keys(base).map(key => Object.assign({ key }, base[key]));
       }
     }
 

@@ -1,4 +1,3 @@
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
@@ -7,6 +6,7 @@
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 
 <link rel="lazy-import" href="pages/wishlist.html">
 <link rel="lazy-import" href="pages/not-found.html">
@@ -36,16 +36,25 @@
     </style>
 
     <app-location
-        route="{{route}}"
-        url-space-regex="^[[rootPath]]">
+      route="{{route}}"
+      url-space-regex="^[[rootPath]]">
     </app-location>
 
     <app-route
-        route="{{route}}"
-        pattern="[[rootPath]]:page"
-        data="{{routeData}}"
-        tail="{{subroute}}">
+      route="{{route}}"
+      pattern="[[rootPath]]:page"
+      data="{{routeData}}"
+      tail="{{subroute}}">
     </app-route>
+
+    <firebase-app
+      name="poly-wishlist"
+      auth-domain="wishlist-e821a.firebaseapp.com"
+      database-url="https://wishlist-e821a.firebaseio.com"
+      api-key="AIzaSyCjfWo276WhMCw3yZt8MbwArEzwPRRhLqw"
+      storage-bucket=""
+      messaging-sender-id="270056303776">
+    </firebase-app>
 
     <app-header-layout>
       <app-header slot="header" condenses reveals effects="waterfall">
