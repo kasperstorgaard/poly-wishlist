@@ -1,7 +1,7 @@
 {
-  "name": "My App",
-  "short_name": "My App",
-  "description": "My App description",
+  "name": "Kasper wishlist",
+  "short_name": "Kaspers wishlist",
+  "description": "Wishlist app for Kasper's 30th birthday",
   "icons": [
     {
       "src": "images/manifest/icon-192x192.png",
