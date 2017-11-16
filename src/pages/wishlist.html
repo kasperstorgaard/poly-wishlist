@@ -62,7 +62,7 @@
 
     <div class="centered-container">
       <ul class="app-grid">
-        <li class="item"><iframe src$="[[_frameUrl]]"></iframe></li>
+        <li hidden$=[[!_online]] class="item"><iframe src$=[[_frameUrl]]></iframe></li>
         <dom-repeat items="[[_items]]" as="item">
           <template>
             <li class="item">
@@ -92,12 +92,24 @@
             type: String,
             value: 'http://tv.giphy.com/celebrate'
           },
-          _itemsData: Object
+          _itemsData: Object,
+          _online: Boolean
         }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        window.addEventListener('online', () => this._updateOnline(true));
+        window.addEventListener('offline', () => this._updateOnline(false));
       }
 
       _getItems({base}) {
         return !base ? [] : Object.keys(base).map(key => Object.assign({ key }, base[key]));
+      }
+
+      _updateOnline(online = window.navigator.onLine) {
+        this._online = online;
       }
     }
 
