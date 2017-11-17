@@ -24,7 +24,11 @@
         list-style: none;
       }
 
-      iframe {
+      .featured {
+        overflow: hidden;
+      }
+
+      .featured img, .featured iframe {
         width: 100%;
         height: 100%;
       }
@@ -62,7 +66,10 @@
 
     <div class="centered-container">
       <ul class="app-grid">
-        <li hidden$=[[!_online]] class="item"><iframe src$=[[_frameUrl]]></iframe></li>
+        <li class="item featured">
+          <iframe hidden$=[[!_online]] src$=[[_frameUrl]]></iframe>
+          <img hidden$=[[_online]] src$=[[_fallbackFrameUrl]]></iframe>
+        </li>
         <dom-repeat items="[[_items]]" as="item">
           <template>
             <li class="item">
@@ -91,6 +98,10 @@
           _frameUrl: {
             type: String,
             value: 'https://tv.giphy.com/celebrate'
+          },
+          _fallbackFrameUrl: {
+            type: String,
+            value: 'https://media.giphy.com/media/CwAn6hs2hoTvi/giphy.gif'
           },
           _itemsData: Object,
           _online: Boolean
