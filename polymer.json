@@ -22,6 +22,12 @@
       "name": "fallback",
       "preset": "es5-bundled",
       "basePath": true
+    },
+    {
+      "name": "modern",
+      "browserCapabilities": ["es2015", "push", "serviceworker"],
+      "preset": "es6-bundled",
+      "basePath": true
     }
   ]
 }
